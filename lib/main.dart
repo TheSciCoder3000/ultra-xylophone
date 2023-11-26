@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,60 +10,81 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    return const MaterialApp(
+      title: 'Neuroxphone',
+      home: Xylophone(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+class Xylophone extends StatefulWidget {
+  const Xylophone({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<Xylophone> createState() => _XylophoneState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _XylophoneState extends State<Xylophone> {
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  void keyCallback(int i) {
+    final player = AudioPlayer();
+    player.play(AssetSource("note$i.wav"));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+    return SafeArea(
+      child: Column(
+        children: [
+          XyloKey(
+            color: Colors.red,
+            fn: () => keyCallback(1),
+          ),
+          XyloKey(
+            color: Colors.orange,
+            fn: () => keyCallback(2),
+          ),
+          XyloKey(
+            color: Colors.yellow,
+            fn: () => keyCallback(3),
+          ),
+          XyloKey(
+            color: Colors.green,
+            fn: () => keyCallback(4),
+          ),
+          XyloKey(
+            color: Colors.teal,
+            fn: () => keyCallback(5),
+          ),
+          XyloKey(
+            color: Colors.blue,
+            fn: () => keyCallback(6),
+          ),
+          XyloKey(
+            color: Colors.indigo,
+            fn: () => keyCallback(7),
+          ),
+        ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+    );
+  }
+}
+
+class XyloKey extends StatelessWidget {
+  const XyloKey({super.key, this.fn, required this.color});
+  final VoidCallback? fn;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: TextButton(
+        style: TextButton.styleFrom(
+          backgroundColor: color,
+          shape: const BeveledRectangleBorder(borderRadius: BorderRadius.zero)
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        onPressed: fn, 
+        child: Container(),
       ),
     );
   }
