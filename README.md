@@ -1,16 +1,12 @@
-# ultra_xylophone
+# Ultra Xylophone
 
-A new Flutter project.
+Built using flutter with audioplayers dart package.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## About the Application
 
-A few resources to get you started if this is your first Flutter project:
+A flutter program to be submitted to `Sir Jopak Isaguirre` for Enabling Assessment 5. It has the following features:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Widget Tree
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![widget tree](https://github.com/TheSciCoder3000/ultra-xylophone/blob/main/widget_tree/Xylophone.jpg?raw=true)
